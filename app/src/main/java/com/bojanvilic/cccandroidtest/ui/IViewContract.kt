@@ -10,9 +10,9 @@ interface IViewContract {
     }
 
     interface ViewModel{
-        fun getPersonById(id: String) : LiveData<Person>
+        fun getPersonById() : LiveData<Person>
         fun insertPerson(person: Person)
-        fun getEstimateById(id: String) : LiveData<Estimate>
+        fun getEstimateById() : LiveData<Estimate>
         fun insertEstimate(estimate: Estimate)
     }
 }

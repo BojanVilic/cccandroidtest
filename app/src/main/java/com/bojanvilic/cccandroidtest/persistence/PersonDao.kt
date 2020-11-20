@@ -6,12 +6,13 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.bojanvilic.cccandroidtest.models.Person
+import io.reactivex.Flowable
 
 @Dao
 interface PersonDao {
 
-    @Query("SELECT * FROM person_table WHERE id = :id")
-    fun getPersonById(id: String) : LiveData<Person>
+    @Query("SELECT * FROM person_table")
+    fun getPersonById() : Flowable<Person>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPerson(person: Person)

@@ -17,8 +17,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application), I
     private val personRepository = PersonRepositoryImpl.getInstance(application)
     private val estimateRepository = EstimateRepositoryImpl.getInstance(application)
 
-    override fun getPersonById(id: String): LiveData<Person> {
-        return personRepository.getPersonById(id)
+    override fun getPersonById(): LiveData<Person> {
+        return personRepository.getPersonById()
     }
 
     override fun insertPerson(person: Person) {
@@ -27,8 +27,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application), I
         }
     }
 
-    override fun getEstimateById(id: String): LiveData<Estimate> {
-        return estimateRepository.getEstimateById(id)
+    override fun getEstimateById(): LiveData<Estimate> {
+        return estimateRepository.getEstimateById()
     }
 
     override fun insertEstimate(estimate: Estimate) {

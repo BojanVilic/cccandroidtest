@@ -4,6 +4,6 @@ import androidx.lifecycle.LiveData
 import com.bojanvilic.cccandroidtest.models.Person
 
 interface IPersonRepository {
-    fun getPersonById(id: String) : LiveData<Person>
+    fun getPersonById() : LiveData<Person>
     suspend fun insertPerson(person: Person)
 }

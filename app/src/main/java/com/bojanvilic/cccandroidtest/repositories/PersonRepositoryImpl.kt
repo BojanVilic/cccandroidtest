@@ -3,7 +3,10 @@ package com.bojanvilic.cccandroidtest.repositories
 import android.app.Person
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.LiveDataReactiveStreams
 import com.bojanvilic.cccandroidtest.persistence.AppDatabase
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class PersonRepositoryImpl(context: Context) : IPersonRepository {
 
@@ -19,8 +22,16 @@ class PersonRepositoryImpl(context: Context) : IPersonRepository {
         }
     }
 
-    override fun getPersonById(id: String): LiveData<com.bojanvilic.cccandroidtest.models.Person> {
-        return personDao.getPersonById(id)
+    override fun getPersonById(): LiveData<com.bojanvilic.cccandroidtest.models.Person> {
+        return LiveDataReactiveStreams.fromPublisher(
+            personDao
+                .getPersonById()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map {
+                    it
+                }
+        )
     }
 
     override suspend fun insertPerson(person: com.bojanvilic.cccandroidtest.models.Person) {

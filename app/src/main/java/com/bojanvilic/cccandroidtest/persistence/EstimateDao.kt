@@ -6,12 +6,13 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.bojanvilic.cccandroidtest.models.Estimate
+import io.reactivex.Flowable
 
 @Dao
 interface EstimateDao {
 
-    @Query("SELECT * FROM estimate_table WHERE id = :id")
-    fun getEstimateById(id: String) : LiveData<Estimate>
+    @Query("SELECT * FROM estimate_table")
+    fun getEstimateById() : Flowable<Estimate>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertEstimate(estimate: Estimate)

@@ -2,8 +2,12 @@ package com.bojanvilic.cccandroidtest.repositories
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.LiveDataReactiveStreams
 import com.bojanvilic.cccandroidtest.models.Estimate
 import com.bojanvilic.cccandroidtest.persistence.AppDatabase
+import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class EstimateRepositoryImpl(private val context: Context) : IEstimateRepository {
 
@@ -19,8 +23,16 @@ class EstimateRepositoryImpl(private val context: Context) : IEstimateRepository
         }
     }
 
-    override fun getEstimateById(id: String): LiveData<Estimate> {
-        return estimateDao.getEstimateById(id)
+    override fun getEstimateById(): LiveData<Estimate> {
+        return LiveDataReactiveStreams.fromPublisher(
+            estimateDao
+                .getEstimateById()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map {
+                    it
+                }
+        )
     }
 
     override suspend fun insertEstimate(estimate: Estimate) {

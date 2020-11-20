@@ -1,13 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.MainFragment">
 
-    <TextView
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="full_name"
+            type="String" />
+
+        <variable
+            name="person"
+            type="com.bojanvilic.cccandroidtest.models.Person" />
+
+        <variable
+            name="estimate"
+            type="com.bojanvilic.cccandroidtest.models.Estimate" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        tools:context=".ui.MainFragment">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:background="#ccc"
+            android:padding="16dp"
+            android:src="@drawable/gray_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/company_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{estimate.company}"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/image_view"
+            app:layout_constraintStart_toEndOf="@+id/image_view"
+            app:layout_constraintTop_toTopOf="@id/image_view"
+            tools:text="Placebo Secondary School" />
+
+        <TextView
+            android:id="@+id/company_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{estimate.address}"
+            app:layout_constraintStart_toStartOf="@+id/company_name"
+            app:layout_constraintTop_toBottomOf="@+id/company_name"
+            tools:text="32 Commissioners Road East" />
+
+        <TextView
+            android:id="@+id/estimate_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/est_details"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/divider"
+            app:layout_constraintStart_toStartOf="@id/image_view"
+            app:layout_constraintTop_toBottomOf="@id/image_view" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/estimate_details" />
+
+        <TextView
+            android:id="@+id/estimate_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/est_number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+        <TextView
+            android:id="@+id/estimate_number_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{String.valueOf(estimate.number)}"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/estimate_number"
+            tools:text="32" />
+
+        <TextView
+            android:id="@+id/created"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/created"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/estimate_number_value" />
+
+        <TextView
+            android:id="@+id/created_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{estimate.createdDate}"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/created"
+            tools:text="2020-08-22" />
+
+        <TextView
+            android:id="@+id/requester"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/requester"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/created_value" />
+
+        <TextView
+            android:id="@+id/requester_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{full_name}"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/requester"
+            tools:text="Joseph Sham" />
+
+        <TextView
+            android:id="@+id/revision_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/revision_number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/estimate_number"
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+        <TextView
+            android:id="@+id/revision_number_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(estimate.revisionNumber)}"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/revision_number"
+            app:layout_constraintTop_toBottomOf="@+id/revision_number"
+            tools:text="2" />
+
+        <TextView
+            android:id="@+id/created_by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/created_by"
+            app:layout_constraintStart_toStartOf="@+id/revision_number"
+            app:layout_constraintTop_toBottomOf="@+id/revision_number_value" />
+
+        <TextView
+            android:id="@+id/created_by_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{full_name}"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/created_by"
+            app:layout_constraintTop_toBottomOf="@+id/created_by"
+            tools:text="Joseph Sham" />
+
+        <TextView
+            android:id="@+id/contact"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/contact"
+            app:layout_constraintStart_toStartOf="@+id/created_by"
+            app:layout_constraintTop_toBottomOf="@+id/created_by_value" />
+
+        <TextView
+            android:id="@+id/contact_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{full_name}"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/contact"
+            app:layout_constraintTop_toBottomOf="@+id/contact"
+            tools:text="Joseph Sham" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
